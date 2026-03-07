@@ -1,289 +1,275 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chrome Extension Toolkit | theluckystrike</title>
-    <style>
-        :root {
-            --bg-color: #0d1117;
-            --text-color: #c9d1d9;
-            --text-muted: #8b949e;
-            --accent: #2f81f7;
-            --card-bg: #161b22;
-            --border-color: #30363d;
-            --hover-border: #8b949e;
-            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chrome Extension Toolkit</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --text: #e6edf3;
+      --accent: #58a6ff;
+      --border: #30363d;
+    }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: var(--font-main);
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
 
-        header {
-            text-align: center;
-            padding: 4rem 2rem;
-            border-bottom: 1px solid var(--border-color);
-            background: linear-gradient(180deg, rgba(47, 129, 247, 0.1) 0%, rgba(13, 17, 23, 0) 100%);
-        }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
 
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: #fff;
-        }
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 80px 0 60px;
+      border-bottom: 1px solid var(--border);
+    }
 
-        h2 {
-            font-size: 2rem;
-            margin: 3rem 0 1.5rem;
-            color: #fff;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 0.5rem;
-        }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--text) 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
-        .subtitle {
-            font-size: 1.25rem;
-            color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto;
-        }
+    .hero p {
+      font-size: 1.25rem;
+      color: #8b949e;
+      max-width: 600px;
+      margin: 0 auto;
+    }
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
+    /* Sections */
+    section {
+      padding: 60px 0;
+      border-bottom: 1px solid var(--border);
+    }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
+    section:last-of-type {
+      border-bottom: none;
+    }
 
-        .card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1.5rem;
-            transition: all 0.2s ease;
-            display: flex;
-            flex-direction: column;
-            text-decoration: none;
-            color: inherit;
-        }
+    h2 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin-bottom: 32px;
+      color: var(--text);
+    }
 
-        .card:hover {
-            border-color: var(--hover-border);
-            transform: translateY(-2px);
-        }
+    /* Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
 
-        .card h3 {
-            color: var(--accent);
-            margin-bottom: 0.5rem;
-            font-size: 1.25rem;
-        }
+    /* Cards */
+    .card {
+      background: #161b22;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
 
-        .card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            flex-grow: 1;
-        }
+    .card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
 
-        .code-block {
-            background-color: #010409;
-            padding: 0.75rem;
-            border-radius: 6px;
-            font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
-            font-size: 0.85rem;
-            color: #e6edf3;
-            margin-top: 1rem;
-            border: 1px solid var(--border-color);
-            overflow-x: auto;
-        }
+    .card h3 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
 
-        .hero-links {
-            margin-top: 2rem;
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
+    .card h3 a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-        .btn {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background-color 0.2s;
-        }
+    .card h3 a:hover {
+      text-decoration: underline;
+    }
 
-        .btn-primary {
-            background-color: #238636;
-            color: #fff;
-            border: 1px solid rgba(240, 246, 252, 0.1);
-        }
+    .card p {
+      font-size: 0.9rem;
+      color: #8b949e;
+      margin-bottom: 12px;
+    }
 
-        .btn-primary:hover {
-            background-color: #2ea043;
-        }
+    .card code {
+      display: inline-block;
+      background: #0d1117;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 4px 8px;
+      font-size: 0.8rem;
+      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+      color: #7ee787;
+      word-break: break-all;
+    }
 
-        .btn-outline {
-            background-color: var(--card-bg);
-            color: var(--text-color);
-            border: 1px solid var(--border-color);
-        }
+    .card .description {
+      font-size: 0.875rem;
+      color: #8b949e;
+    }
 
-        .btn-outline:hover {
-            background-color: var(--border-color);
-            border-color: var(--hover-border);
-        }
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 40px 0;
+      color: #8b949e;
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+    }
 
-        footer {
-            text-align: center;
-            padding: 3rem 2rem;
-            margin-top: 4rem;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-muted);
-        }
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
 
-        footer a {
-            color: var(--accent);
-            text-decoration: none;
-        }
+    footer a:hover {
+      text-decoration: underline;
+    }
 
-        footer a:hover {
-            text-decoration: underline;
-        }
+    /* Responsive */
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
 
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 2.25rem;
-            }
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
 
-            .grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 40px 0;
+      }
+    }
+  </style>
 </head>
-
 <body>
-
-    <header>
-        <h1>Chrome Extension Toolkit</h1>
-        <p class="subtitle">A comprehensive, curated ecosystem for building modern, Manifest V3 compliant Chrome
-            Extensions.</p>
-
-        <div class="hero-links">
-            <a href="https://github.com/theluckystrike/chrome-extension-guide" class="btn btn-primary">📖 Read the
-                Definitive Guide</a>
-            <a href="https://github.com/theluckystrike/extension-monetization-playbook" class="btn btn-outline">💰
-                Monetization Playbook</a>
-        </div>
+  <div class="container">
+    <header class="hero">
+      <h1>Chrome Extension Toolkit</h1>
+      <p>Everything you need to build, ship, and monetize Chrome extensions</p>
     </header>
 
-    <div class="container">
-
+    <section>
+      <div class="container">
         <h2>Starter Templates</h2>
-        <p style="margin-bottom: 1.5rem; color: var(--text-muted);">Ten distinct, ready-to-use boilerplate repositories.
-            Clone them, <code>npm install</code>, and start building immediately.</p>
-
         <div class="grid">
-            <a href="https://github.com/theluckystrike/chrome-extension-react-starter" class="card">
-                <h3>React Starter</h3>
-                <p>React 18 + TypeScript + Vite + Tailwind CSS boilerplate. MV3 ready.</p>
-            </a>
-
-            <a href="https://github.com/theluckystrike/chrome-extension-svelte-starter" class="card">
-                <h3>Svelte Starter</h3>
-                <p>Svelte 4 + TypeScript + Vite + Tailwind CSS boilerplate. MV3 ready.</p>
-            </a>
-
-            <a href="https://github.com/theluckystrike/chrome-extension-vue-starter" class="card">
-                <h3>Vue Starter</h3>
-                <p>Vue 3 + TypeScript + Vite + Tailwind CSS boilerplate. MV3 ready.</p>
-            </a>
-
-            <a href="https://github.com/theluckystrike/chrome-extension-vanilla-ts-starter" class="card">
-                <h3>Vanilla TS Starter</h3>
-                <p>Pure TypeScript + esbuild Chrome extension boilerplate. No heavy frameworks.</p>
-            </a>
-
-            <a href="https://github.com/theluckystrike/chrome-extension-content-script-starter" class="card">
-                <h3>Content Script Starter</h3>
-                <p>Pure TypeScript boilerplate explicitly focused on injecting DOM logic via Content Scripts.</p>
-            </a>
-
-            <a href="https://github.com/theluckystrike/chrome-extension-popup-starter" class="card">
-                <h3>Popup Starter</h3>
-                <p>Pure TypeScript boilerplate explicitly focused on the popup UI.</p>
-            </a>
-
-            <a href="https://github.com/theluckystrike/chrome-extension-devtools-starter" class="card">
-                <h3>DevTools Starter</h3>
-                <p>Pure TypeScript boilerplate designed for creating custom Chrome Developer Tools panels.</p>
-            </a>
-
-            <a href="https://github.com/theluckystrike/chrome-extension-side-panel-starter" class="card">
-                <h3>Side Panel Starter</h3>
-                <p>Pure TypeScript boilerplate for the powerful new `chrome.sidePanel` persistent UI standard.</p>
-            </a>
-
-            <a href="https://github.com/theluckystrike/chrome-extension-full-stack" class="card">
-                <h3>Full-Stack Starter</h3>
-                <p>The kitchen sink. Svelte, Vite, Background messaging, injected UIs, and Storage Sync APIs all
-                    configured to work together.</p>
-            </a>
-
-            <a href="https://github.com/theluckystrike/chrome-extension-mv3-minimal" class="card">
-                <h3>Minimal MV3 Starter</h3>
-                <p>The absolute bare minimum Manifest V3 extension. Pure HTML/JS/CSS. No bundler.</p>
-            </a>
+          <div class="card">
+            <h3><a href="https://github.com/theluckystrike/chrome-extension-react-starter" target="_blank" rel="noopener">chrome-extension-react-starter</a></h3>
+            <p class="description">React 18, TypeScript, Vite, Tailwind</p>
+          </div>
+          <div class="card">
+            <h3><a href="https://github.com/theluckystrike/chrome-extension-svelte-starter" target="_blank" rel="noopener">chrome-extension-svelte-starter</a></h3>
+            <p class="description">Svelte 4, TypeScript, Vite, Tailwind</p>
+          </div>
+          <div class="card">
+            <h3><a href="https://github.com/theluckystrike/chrome-extension-vue-starter" target="_blank" rel="noopener">chrome-extension-vue-starter</a></h3>
+            <p class="description">Vue 3, TypeScript, Vite, Tailwind</p>
+          </div>
+          <div class="card">
+            <h3><a href="https://github.com/theluckystrike/chrome-extension-vanilla-ts-starter" target="_blank" rel="noopener">chrome-extension-vanilla-ts-starter</a></h3>
+            <p class="description">Pure TypeScript with esbuild</p>
+          </div>
+          <div class="card">
+            <h3><a href="https://github.com/theluckystrike/chrome-extension-content-script-starter" target="_blank" rel="noopener">chrome-extension-content-script-starter</a></h3>
+            <p class="description">Focused on DOM injection</p>
+          </div>
+          <div class="card">
+            <h3><a href="https://github.com/theluckystrike/chrome-extension-popup-starter" target="_blank" rel="noopener">chrome-extension-popup-starter</a></h3>
+            <p class="description">Focused on popup UI</p>
+          </div>
+          <div class="card">
+            <h3><a href="https://github.com/theluckystrike/chrome-extension-devtools-starter" target="_blank" rel="noopener">chrome-extension-devtools-starter</a></h3>
+            <p class="description">Custom Chrome DevTools panels</p>
+          </div>
+          <div class="card">
+            <h3><a href="https://github.com/theluckystrike/chrome-extension-side-panel-starter" target="_blank" rel="noopener">chrome-extension-side-panel-starter</a></h3>
+            <p class="description">Persistent side panel UI</p>
+          </div>
+          <div class="card">
+            <h3><a href="https://github.com/theluckystrike/chrome-extension-full-stack" target="_blank" rel="noopener">chrome-extension-full-stack</a></h3>
+            <p class="description">Svelte, Vite, Tailwind, messaging, storage</p>
+          </div>
+          <div class="card">
+            <h3><a href="https://github.com/theluckystrike/chrome-extension-mv3-minimal" target="_blank" rel="noopener">chrome-extension-mv3-minimal</a></h3>
+            <p class="description">Pure HTML/JS/CSS, no bundler</p>
+          </div>
         </div>
+      </div>
+    </section>
 
-        <h2>Helper Packages</h2>
-        <p style="margin-bottom: 1.5rem; color: var(--text-muted);">Robust npm packages to abstract away the most
-            painful aspects of extension development.</p>
-
+    <section>
+      <div class="container">
+        <h2>npm Packages</h2>
         <div class="grid">
-            <a href="https://github.com/theluckystrike/webext-storage" class="card">
-                <h3>webext-storage</h3>
-                <p>A strongly-typed, promise-based wrapper around `chrome.storage` that handles serialization and quota
-                    limits.</p>
-                <div class="code-block">npm install @theluckystrike/webext-storage</div>
-            </a>
-
-            <a href="https://github.com/theluckystrike/webext-messaging" class="card">
-                <h3>webext-messaging</h3>
-                <p>A robust messaging bridge between your background scripts, content scripts, and UI layers.</p>
-                <div class="code-block">npm install @theluckystrike/webext-messaging</div>
-            </a>
-
-            <a href="https://github.com/theluckystrike/webext-permissions" class="card">
-                <h3>webext-permissions</h3>
-                <p>Simplified API request patterns for optional host permissions and extension features.</p>
-                <div class="code-block">npm install @theluckystrike/webext-permissions</div>
-            </a>
+          <div class="card">
+            <h3><a href="https://github.com/theluckystrike/webext-storage" target="_blank" rel="noopener">webext-storage</a></h3>
+            <code>npm install webext-storage</code>
+          </div>
+          <div class="card">
+            <h3><a href="https://github.com/theluckystrike/webext-messaging" target="_blank" rel="noopener">webext-messaging</a></h3>
+            <code>npm install webext-messaging</code>
+          </div>
+          <div class="card">
+            <h3><a href="https://github.com/theluckystrike/webext-permissions" target="_blank" rel="noopener">webext-permissions</a></h3>
+            <code>npm install webext-permissions</code>
+          </div>
         </div>
+      </div>
+    </section>
 
-    </div>
+    <section>
+      <div class="container">
+        <h2>Guides</h2>
+        <div class="grid">
+          <div class="card">
+            <h3><a href="https://github.com/theluckystrike/chrome-extension-guide" target="_blank" rel="noopener">chrome-extension-guide</a></h3>
+            <p class="description">9 article categories covering Manifest V3, permissions, APIs, and publishing</p>
+          </div>
+          <div class="card">
+            <h3><a href="https://github.com/theluckystrike/extension-monetization-playbook" target="_blank" rel="noopener">extension-monetization-playbook</a></h3>
+            <p class="description">The complete guide to making money with browser extensions. Revenue models, payments, growth, and real case studies.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <footer>
-        <p>Built by <a href="https://github.com/theluckystrike">theluckystrike</a> / <a
-                href="https://zovo.one">zovo.one</a></p>
+      <p>Built by <a href="https://github.com/theluckystrike" target="_blank" rel="noopener">theluckystrike</a> | <a href="https://zovo.one" target="_blank" rel="noopener">zovo.one</a></p>
     </footer>
-
+  </div>
 </body>
-
 </html>
