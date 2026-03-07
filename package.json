@@ -1,0 +1,50 @@
+{
+  "name": "@theluckystrike/chrome-extension-toolkit",
+  "version": "1.0.0",
+  "description": "All-in-one toolkit for Chrome MV3 extensions — re-exports webext-context-menu, webext-notifications, webext-tabs, webext-badge, and webext-offscreen",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts",
+    "test": "vitest run",
+    "lint": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@theluckystrike/webext-context-menu": "github:theluckystrike/webext-context-menu",
+    "@theluckystrike/webext-notifications": "github:theluckystrike/webext-notifications",
+    "@theluckystrike/webext-tabs": "github:theluckystrike/webext-tabs",
+    "@theluckystrike/webext-badge": "github:theluckystrike/webext-badge",
+    "@theluckystrike/webext-offscreen": "github:theluckystrike/webext-offscreen"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.0",
+    "typescript": "^5.3.0",
+    "vitest": "^1.0.0"
+  },
+  "keywords": [
+    "chrome-extension",
+    "manifest-v3",
+    "typescript",
+    "browser-extension",
+    "webextension",
+    "toolkit"
+  ],
+  "author": "theluckystrike",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theluckystrike/chrome-extension-toolkit.git"
+  },
+  "homepage": "https://github.com/theluckystrike/chrome-extension-toolkit"
+}
