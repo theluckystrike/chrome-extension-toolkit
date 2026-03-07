@@ -12,13 +12,16 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
-    "build": "tsup src/index.ts --format esm,cjs --dts",
+    "build": "tsup src/index.ts --format esm,cjs --external @theluckystrike/webext-context-menu --external @theluckystrike/webext-notifications --external @theluckystrike/webext-tabs --external @theluckystrike/webext-badge --external @theluckystrike/webext-offscreen",
     "test": "vitest run",
     "lint": "tsc --noEmit",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "prepare": "npm run build"
   },
   "dependencies": {
     "@theluckystrike/webext-context-menu": "github:theluckystrike/webext-context-menu",
