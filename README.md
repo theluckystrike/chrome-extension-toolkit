@@ -1,11 +1,6 @@
-[![CI](https://github.com/theluckystrike/chrome-extension-toolkit/actions/workflows/ci.yml/badge.svg)](https://github.com/theluckystrike/chrome-extension-toolkit/actions)
-[![npm](https://img.shields.io/npm/v/@theluckystrike/chrome-extension-toolkit)](https://www.npmjs.com/package/@theluckystrike/chrome-extension-toolkit)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue.svg)](https://www.typescriptlang.org/)
-
 # chrome-extension-toolkit
 
-One install, every Chrome extension helper you need. Re-exports all five `@theluckystrike/webext-*` packages.
+All-in-one TypeScript toolkit for Chrome Manifest V3 extensions. One install gives you typed helpers for context menus, notifications, tabs, badge, and offscreen documents.
 
 ## Install
 
@@ -13,52 +8,52 @@ One install, every Chrome extension helper you need. Re-exports all five `@thelu
 npm install @theluckystrike/chrome-extension-toolkit
 ```
 
-That single install gives you context menus, notifications, tabs, badge, and offscreen helpers — all fully typed.
-
-## Usage
+## Quick Start
 
 ```typescript
 import {
-  createMenu, registerMenus,          // context menus
-  notify, notifyBasic,                 // notifications
-  getActiveTab, openTab, closeTab,     // tabs
-  setBadge, showCount, clearBadge,     // badge
-  ensureOffscreen, sendToOffscreen,    // offscreen
-} from '@theluckystrike/chrome-extension-toolkit';
+  createMenu, registerMenus,
+  notify,
+  getActiveTab, openTab,
+  setBadge, clearBadge,
+  ensureOffscreen, sendToOffscreen,
+} from "@theluckystrike/chrome-extension-toolkit";
 
-// Create a context menu
-const menu = createMenu({
-  id: 'search',
-  title: 'Search "%s"',
-  contexts: ['selection'],
-  onclick: (info) => console.log(info.selectionText),
-});
-registerMenus([menu]);
+// Context menu
+registerMenus([
+  createMenu({
+    id: "search",
+    title: 'Search "%s"',
+    contexts: ["selection"],
+    onclick: (info) => console.log(info.selectionText),
+  }),
+]);
 
-// Show a notification
-await notify({ title: 'Done', message: 'Task complete' });
+// Notification
+await notify({ title: "Done", message: "Task complete" });
 
-// Get current tab
+// Tabs
 const tab = await getActiveTab();
+await openTab("https://example.com");
 
-// Update the badge
-setBadge({ text: '5', color: 'red' });
+// Badge
+setBadge({ text: "5", color: "red" });
 
-// Use offscreen document
-await ensureOffscreen({ url: 'offscreen.html', reasons: ['AUDIO_PLAYBACK'] });
+// Offscreen document
+await ensureOffscreen({ url: "offscreen.html", reasons: ["AUDIO_PLAYBACK"] });
 ```
 
-## What's Included
+## Included Packages
 
-| Package | Key Exports |
-|---------|-------------|
-| [webext-context-menu](https://github.com/theluckystrike/webext-context-menu) | `createMenu`, `registerMenus`, `updateMenu`, `removeMenu`, `removeAllMenus`, `MenuItem` |
-| [webext-notifications](https://github.com/theluckystrike/webext-notifications) | `notify`, `notifyBasic`, `notifyProgress`, `updateNotification`, `clearNotification` |
-| [webext-tabs](https://github.com/theluckystrike/webext-tabs) | `getActiveTab`, `getAllTabs`, `openTab`, `closeTab`, `reloadTab`, `duplicateTab`, `moveTab` |
-| [webext-badge](https://github.com/theluckystrike/webext-badge) | `setBadge`, `clearBadge`, `showCount`, `showStatus`, `flashBadge`, `COLORS` |
-| [webext-offscreen](https://github.com/theluckystrike/webext-offscreen) | `ensureOffscreen`, `hasOffscreen`, `closeOffscreen`, `sendToOffscreen`, `createOffscreenHelper` |
+| Package | Description |
+| --- | --- |
+| [webext-context-menu](https://github.com/theluckystrike/webext-context-menu) | Create, update, and remove context menus |
+| [webext-notifications](https://github.com/theluckystrike/webext-notifications) | Basic, image, list, and progress notifications |
+| [webext-tabs](https://github.com/theluckystrike/webext-tabs) | Query, open, close, reload, duplicate, and move tabs |
+| [webext-badge](https://github.com/theluckystrike/webext-badge) | Set text, color, counts, status indicators, and flash effects |
+| [webext-offscreen](https://github.com/theluckystrike/webext-offscreen) | Manage offscreen documents and bidirectional messaging |
 
-## Or Install Individually
+Each package is also available standalone:
 
 ```bash
 npm install @theluckystrike/webext-context-menu
@@ -68,10 +63,14 @@ npm install @theluckystrike/webext-badge
 npm install @theluckystrike/webext-offscreen
 ```
 
+## Features
+
+- TypeScript-first with full type exports for every API
+- Targets Chrome Manifest V3 (service worker compatible)
+- Tree-shakeable ESM and CJS builds via tsup
+- Zero runtime dependencies beyond the five webext packages
+- Each sub-package works independently or through this umbrella
+
 ## License
 
-MIT
-
----
-
-Built by [theluckystrike](https://github.com/theluckystrike) — [zovo.one](https://zovo.one)
+MIT -- see [LICENSE](LICENSE).
