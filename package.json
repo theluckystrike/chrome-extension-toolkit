@@ -25,9 +25,9 @@
   },
   "dependencies": {
     "@theluckystrike/webext-context-menu": "github:theluckystrike/webext-context-menu",
-    "@theluckystrike/webext-notifications": "github:theluckystrike/webext-notifications",
+    "@theluckystrike/webext-notifications": "github:theluckystrike/webext-notifications#5bdf041e97239367ddcd9fecef845b695c519b9e",
     "@theluckystrike/webext-tabs": "github:theluckystrike/webext-tabs",
-    "@theluckystrike/webext-badge": "github:theluckystrike/webext-badge",
+    "@theluckystrike/webext-badge": "github:theluckystrike/webext-badge#22137df394c29d059cd68288c20b237b5b959161",
     "@theluckystrike/webext-offscreen": "github:theluckystrike/webext-offscreen"
   },
   "devDependencies": {
